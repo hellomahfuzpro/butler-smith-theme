@@ -1,0 +1,43 @@
+/* ============================================================
+   Butler-Smith Developments — Design System Tokens
+   ============================================================ */
+
+:root {
+  /* Brand Palettes */
+  --bsd-charcoal:      #161616;
+  --bsd-charcoal-soft: #161616;
+  --bsd-charcoal-line: rgba(255, 255, 255, 0.12);
+  --bsd-cream:         #ffffff;
+  --bsd-cream-alt:     #f2f2f0;
+  --bsd-paper:         #ffffff;
+  --bsd-ink:           #111111;
+  --bsd-ink-soft:      #55534f;
+  --bsd-stone:         #C17A4D;
+  --bsd-stone-dark:    #8B4F2B;
+  --bsd-line:          rgba(10, 10, 10, 0.14);
+  --bsd-shadow:        0 30px 60px -30px rgba(10, 10, 10, 0.35);
+
+  /* Typography */
+  --bsd-font-display:  "Roboto", "Helvetica Neue", Arial, sans-serif;
+  --bsd-font-sans:     "Roboto", "Helvetica Neue", Arial, sans-serif;
+
+  /* Layout */
+  --bsd-container:     1240px;
+
+  /* Backward Compatibility Aliases */
+  --charcoal:      var(--bsd-charcoal);
+  --charcoal-soft: var(--bsd-charcoal-soft);
+  --charcoal-line: var(--bsd-charcoal-line);
+  --cream:         var(--bsd-cream);
+  --cream-alt:     var(--bsd-cream-alt);
+  --paper:         var(--bsd-paper);
+  --ink:           var(--bsd-ink);
+  --ink-soft:      var(--bsd-ink-soft);
+  --stone:         var(--bsd-stone);
+  --stone-dark:    var(--bsd-stone-dark);
+  --line:          var(--bsd-line);
+  --shadow:        var(--bsd-shadow);
+  --font-display:  var(--bsd-font-display);
+  --font-sans:     var(--bsd-font-sans);
+  --container:     var(--bsd-container);
+}

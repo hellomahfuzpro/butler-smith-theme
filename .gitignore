@@ -1,0 +1,16 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Archives
+*.zip
+*.tar.gz
+
+# Logs
+*.log
+
+# Dependencies & IDE
+node_modules/
+.vscode/
+.idea/
