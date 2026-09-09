@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('BSD_VERSION', '1.0.0');
+define('BSD_VERSION', '1.0.1');
 define('BSD_DIR', get_template_directory());
 define('BSD_URI', get_template_directory_uri());
 
@@ -103,16 +103,23 @@ require_once BSD_DIR . '/inc/demo-import.php';
 /**
  * Optional: Plugin Update Checker Integration
  */
-if (file_exists(BSD_DIR . '/lib/plugin-update-checker/plugin-update-checker.php')) {
-    require_once BSD_DIR . '/lib/plugin-update-checker/plugin-update-checker.php';
-    use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+function bsd_bootstrap_updater() {
+    $lib = BSD_DIR . '/lib/plugin-update-checker/plugin-update-checker.php';
+    if (!file_exists($lib)) {
+        return;
+    }
+    require_once $lib;
 
-    $bsd_update_checker = PucFactory::buildUpdateChecker(
-        'https://github.com/hellomahfuzpro/butler-smith-theme/',
-        __FILE__,
-        'butler-smith'
-    );
-    if (method_exists($bsd_update_checker, 'getVcsApi')) {
-        $bsd_update_checker->getVcsApi()->enableReleaseAssets();
+    if (class_exists('\YahnisElsts\PluginUpdateChecker\v5\PucFactory')) {
+        $bsd_update_checker = \YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
+            'https://github.com/hellomahfuzpro/butler-smith-theme/',
+            BSD_DIR . '/style.css',
+            get_template()
+        );
+        if ($bsd_update_checker && method_exists($bsd_update_checker->getVcsApi(), 'enableReleaseAssets')) {
+            $bsd_update_checker->getVcsApi()->enableReleaseAssets();
+        }
     }
 }
+add_action('after_setup_theme', 'bsd_bootstrap_updater');
+
