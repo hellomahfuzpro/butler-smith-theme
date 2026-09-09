@@ -2,8 +2,27 @@
  * Butler-Smith Developments — Main JavaScript
  */
 
+(function () {
+  'use strict';
+
+  // Only enable scroll reveal animations on live frontend, never inside Elementor editor
+  var isElementorEditor = window.self !== window.top && (
+    document.body.classList.contains('elementor-editor-active') ||
+    document.body.classList.contains('elementor-editor-preview') ||
+    window.location.search.indexOf('elementor-preview') !== -1
+  );
+
+  if (!isElementorEditor) {
+    document.documentElement.classList.add('bsd-js-ready');
+  }
+})();
+
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
+
+  var isElementorEditor = document.body.classList.contains('elementor-editor-active') ||
+                          document.body.classList.contains('elementor-editor-preview') ||
+                          (window.self !== window.top && window.location.search.indexOf('elementor-preview') !== -1);
 
   // Mobile nav toggle (hamburger morphs into a close/X button)
   var toggle = document.querySelector('.nav-toggle');
@@ -54,19 +73,37 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Scroll reveal animations
-  var revealEls = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && revealEls.length) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    revealEls.forEach(function (el) { io.observe(el); });
+  if (isElementorEditor) {
+    // In Elementor editor: immediately reveal everything without animations
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      el.classList.add('in');
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
   } else {
-    revealEls.forEach(function (el) { el.classList.add('in'); });
+    var revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && revealEls.length) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      revealEls.forEach(function (el) { io.observe(el); });
+    } else {
+      revealEls.forEach(function (el) { el.classList.add('in'); });
+    }
+  }
+
+  // Elementor dynamic re-render hooks
+  if (window.elementorFrontend && window.elementorFrontend.hooks) {
+    window.elementorFrontend.hooks.addAction('frontend/element_ready/global', function ($scope) {
+      if ($scope) {
+        $scope.find('.reveal').addClass('in').css({ opacity: 1, transform: 'none' });
+      }
+    });
   }
 
   // Cookie consent banner

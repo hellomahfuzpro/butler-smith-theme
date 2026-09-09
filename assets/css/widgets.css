@@ -569,10 +569,25 @@ section { padding: 96px 0; }
   border-color: var(--bsd-stone);
 }
 
-/* ---------- Utility ---------- */
+/* ---------- Utility & Scroll Animations ---------- */
 .mt-0 { margin-top: 0; }
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
-.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* Default state: All elements are visible (fail-safe for editor mode, crawlers, no-js) */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* Scroll reveal only runs on live site when JS is confirmed loaded and NOT in Elementor editor */
+html.bsd-js-ready body:not(.elementor-editor-active):not(.elementor-editor-preview) .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+html.bsd-js-ready body:not(.elementor-editor-active):not(.elementor-editor-preview) .reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 .breadcrumb { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(247,244,238,0.6); }
 .breadcrumb a:hover { color: var(--bsd-stone); }
@@ -629,8 +644,37 @@ section { padding: 96px 0; }
   max-width: 100% !important;
   padding: 0 !important;
 }
-.elementor-widget-bsd_hero_split,
-.elementor-widget-bsd_cta_band,
-.elementor-widget-bsd_split_content {
+
+.bsd-wrap {
   width: 100%;
+  display: block;
 }
+
+.elementor-widget-bsd_hero_split,
+.elementor-widget-bsd_three_ways,
+.elementor-widget-bsd_testimonial,
+.elementor-widget-bsd_split_content,
+.elementor-widget-bsd_process_steps,
+.elementor-widget-bsd_feature_checklist,
+.elementor-widget-bsd_developments_grid,
+.elementor-widget-bsd_service_cards,
+.elementor-widget-bsd_gallery_strip,
+.elementor-widget-bsd_cta_band,
+.elementor-widget-bsd_dev_specs,
+.elementor-widget-bsd_contact {
+  width: 100% !important;
+}
+
+/* Force 100% visibility for all elements in Elementor editor and preview iframe */
+.elementor-editor-active .reveal,
+.elementor-editor-preview .reveal,
+body.elementor-editor-active .reveal,
+body.elementor-editor-preview .reveal,
+.elementor-edit-area .reveal,
+.elementor-editor-active .bsd-wrap .reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+  transition: none !important;
+}
+

@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('BSD_VERSION', '1.0.1');
+define('BSD_VERSION', '1.0.2');
 define('BSD_DIR', get_template_directory());
 define('BSD_URI', get_template_directory_uri());
 
