@@ -98,6 +98,19 @@ function bsd_customize_register($wp_customize) {
         'priority' => 30,
     ));
 
+    // Dedicated Footer Logo
+    $wp_customize->add_setting('bsd_footer_logo', array(
+        'default'           => '',
+        'sanitize_callback' => 'absint',
+    ));
+    $wp_customize->add_control(new WP_Customize_Media_Control($wp_customize, 'bsd_footer_logo', array(
+        'label'       => __('Footer Logo', 'butler-smith'),
+        'description' => __('Upload a dedicated logo for the footer. If left empty, it will fall back to the main site logo.', 'butler-smith'),
+        'section'     => 'bsd_footer_section',
+        'mime_type'   => 'image',
+        'priority'    => 5,
+    )));
+
     $wp_customize->add_setting('bsd_footer_bio', array(
         'default'           => 'Designing and building exceptional bespoke homes from concept to completion, across Cheshire, Shropshire & Staffordshire.',
         'sanitize_callback' => 'sanitize_textarea_field',

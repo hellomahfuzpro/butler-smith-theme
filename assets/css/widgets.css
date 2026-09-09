@@ -141,7 +141,7 @@ section { padding: 96px 0; }
   margin: 0 auto;
 }
 .brand { display: flex; align-items: center; gap: 16px; }
-.brand img { height: 96px; width: 96px; object-fit: contain; }
+.brand img { height: 96px; width: auto; max-width: 220px; object-fit: contain; }
 .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
 .brand-text .name {
   font-family: var(--bsd-font-sans);
@@ -285,14 +285,38 @@ section { padding: 96px 0; }
 .hero-split .hero-text h1 { color: var(--bsd-paper); max-width: 620px; }
 .hero-split .hero-text .lede { color: rgba(247,244,238,0.82); font-size: 1.2rem; max-width: 560px; }
 .hero-split .hero-actions { display: flex; gap: 18px; margin-top: 32px; flex-wrap: wrap; }
-.hero-split .split-media { position: relative; min-height: 380px; overflow: hidden; }
+.hero-split .split-media {
+  position: relative;
+  min-height: 380px;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
 .hero-split .split-media .photo,
 .hero-split .split-media .img-ph {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  aspect-ratio: auto;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  aspect-ratio: auto !important;
+}
+.hero-split .split-media .photo img,
+.hero-split .split-media img {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
 }
 .hero-split.compact .hero-text { padding-bottom: 48px; }
 .hero-split.compact .split-media { min-height: 300px; }
@@ -304,7 +328,7 @@ section { padding: 96px 0; }
     min-height: 100vh;
   }
   .hero-split .hero-text { padding: 160px clamp(32px, 6vw, 100px) 96px; }
-  .hero-split .split-media { min-height: 100%; }
+  .hero-split .split-media { min-height: 100%; height: 100%; }
 }
 
 /* ---------- Image Placeholders ---------- */
@@ -339,8 +363,54 @@ section { padding: 96px 0; }
 .ph-3-4  { aspect-ratio: 3/4; }
 .ph-21-9 { aspect-ratio: 21/9; }
 
-.photo { position: relative; overflow: hidden; background: var(--bsd-charcoal-soft); }
-.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo.ph-16-9,
+.photo.ph-4-3,
+.photo.ph-1-1,
+.photo.ph-3-4,
+.photo.ph-21-9 {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.photo.ph-16-9 img,
+.photo.ph-4-3 img,
+.photo.ph-1-1 img,
+.photo.ph-3-4 img,
+.photo.ph-21-9 img {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+.photo {
+  position: relative;
+  overflow: hidden;
+  background: var(--bsd-charcoal-soft);
+}
+
+/* High-specificity override defeating Elementor's .elementor img { height: auto; } */
+.photo img,
+.elementor .photo img,
+.elementor-widget-container .photo img,
+.elementor-widget-bsd_hero_split .photo img,
+.elementor-widget-bsd_split_content .photo img,
+.elementor-widget-bsd_service_cards .photo img,
+.elementor-widget-bsd_developments_grid .photo img,
+.elementor-widget-bsd_gallery_strip .photo img,
+.bsd-wrap .photo img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+}
 
 /* ---------- Grids / Cards ---------- */
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
@@ -538,7 +608,7 @@ section { padding: 96px 0; }
 @media (max-width: 860px) { .footer-top { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 520px) { .footer-top { grid-template-columns: 1fr; } }
 .footer-brand .brand { margin-bottom: 16px; }
-.footer-brand .brand img { height: 56px; width: 56px; }
+.footer-brand .brand img { height: 56px; width: auto; max-width: 220px; object-fit: contain; }
 .footer-brand p { color: rgba(247,244,238,0.55); font-size: 0.9rem; max-width: 320px; }
 .footer-col h4 {
   font-family: var(--bsd-font-sans); font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase;

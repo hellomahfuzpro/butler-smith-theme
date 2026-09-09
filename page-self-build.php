@@ -24,7 +24,7 @@ if (have_posts()) :
                     </div>
                 </div>
                 <div class="split-media">
-                    <div class="photo ph-21-9">
+                    <div class="photo">
                         <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/developments/self-build/hero.jpg'); ?>" alt="Butley | Self Build | Butler Smith Developments" loading="lazy">
                     </div>
                 </div>

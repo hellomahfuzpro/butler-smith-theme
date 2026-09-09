@@ -6,11 +6,20 @@
       <div class="footer-brand">
         <a class="brand" href="<?php echo esc_url(home_url('/')); ?>">
           <?php
-          $custom_logo_id = get_theme_mod('custom_logo');
-          if ($custom_logo_id) {
-              echo wp_get_attachment_image($custom_logo_id, 'thumbnail', false, array('alt' => get_bloginfo('name')));
+          $footer_logo_id = get_theme_mod('bsd_footer_logo');
+          $logo_id        = $footer_logo_id ? $footer_logo_id : get_theme_mod('custom_logo');
+
+          if ($logo_id) {
+              if (is_numeric($logo_id)) {
+                  echo wp_get_attachment_image((int)$logo_id, 'full', false, array(
+                      'alt'   => get_bloginfo('name') . ' logo',
+                      'class' => 'footer-logo-img',
+                  ));
+              } else {
+                  echo '<img src="' . esc_url($logo_id) . '" alt="' . esc_attr(get_bloginfo('name')) . ' logo" class="footer-logo-img">';
+              }
           } else {
-              echo '<img src="' . esc_url(get_template_directory_uri() . '/assets/img/logo/butler-smith-logo-transparent.png') . '" alt="' . esc_attr(get_bloginfo('name')) . ' logo">';
+              echo '<img src="' . esc_url(get_template_directory_uri() . '/assets/img/logo/butler-smith-logo-transparent.png') . '" alt="' . esc_attr(get_bloginfo('name')) . ' logo" class="footer-logo-img">';
           }
           ?>
           <span class="brand-text">

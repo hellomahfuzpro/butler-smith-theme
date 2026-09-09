@@ -21,7 +21,7 @@ if (have_posts()) :
                     <p class="lede">Bespoke homes, exceptional by design, across Cheshire, Shropshire and Staffordshire. Having built our reputation through our own developments, we now focus on helping clients build theirs.</p>
                 </div>
                 <div class="split-media">
-                    <div class="photo ph-21-9">
+                    <div class="photo">
                         <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/about/hero.jpg'); ?>" alt="A Butler-Smith Developments new build home" loading="lazy">
                     </div>
                 </div>

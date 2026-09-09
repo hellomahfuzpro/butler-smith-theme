@@ -175,7 +175,7 @@ class BSD_Widget_Hero_Split extends BSD_Widget_Base {
                     <?php endif; ?>
                 </div>
                 <div class="split-media">
-                    <div class="photo ph-21-9">
+                    <div class="photo">
                         <?php $this->render_media($settings['image'], !empty($settings['title']) ? strip_tags($settings['title']) : 'Hero Image'); ?>
                     </div>
                 </div>

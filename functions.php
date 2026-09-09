@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('BSD_VERSION', '1.0.2');
+define('BSD_VERSION', '1.0.3');
 define('BSD_DIR', get_template_directory());
 define('BSD_URI', get_template_directory_uri());
 
@@ -98,6 +98,7 @@ require_once BSD_DIR . '/inc/customizer.php';
 require_once BSD_DIR . '/inc/post-types.php';
 require_once BSD_DIR . '/inc/submissions.php';
 require_once BSD_DIR . '/inc/elementor.php';
+require_once BSD_DIR . '/inc/media.php';
 require_once BSD_DIR . '/inc/demo-import.php';
 
 /**

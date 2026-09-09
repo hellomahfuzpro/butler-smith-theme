@@ -21,7 +21,7 @@ if (have_posts()) :
                     <p class="lede">Tell us a little about your project and a member of the Butler-Smith team will be in touch to arrange a conversation.</p>
                 </div>
                 <div class="split-media">
-                    <div class="photo ph-21-9">
+                    <div class="photo">
                         <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/developments/kingham/hero.jpg'); ?>" alt="Kingham — Butler-Smith craftsmanship" loading="lazy">
                     </div>
                 </div>
